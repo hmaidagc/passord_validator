@@ -28,6 +28,13 @@ export class PasswordValidator {
       })
     }
 
+    if (!/[A-Z]/.test(password)) {
+      return (response = {
+        result: false,
+        errors: [PasswordErrors.NoUpperCase],
+      })
+    }
+
     return (response = {
       result: true,
       errors: [],

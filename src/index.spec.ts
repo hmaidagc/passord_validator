@@ -24,4 +24,13 @@ describe('password validator', () => {
     expect(response.result).toBeFalsy()
     expect(response.errors[0]).toEqual('InvalidLenghtError')
   })
+
+  it('returns  no upper case error for password without at least one upper case letter', () => {
+    // Arrange
+    // Act
+    let response = PasswordValidator.checkPassword('maxwell1_c')
+    // Assert
+    expect(response.result).toBeFalsy()
+    expect(response.errors[0]).toEqual('NoUpperCase')
+  })
 })
