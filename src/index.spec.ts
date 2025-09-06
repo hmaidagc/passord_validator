@@ -1,9 +1,15 @@
+import { PasswordValidator } from './index'
 
 describe('password validator', () => {
+  it('returns invalid lenght error for strings less than 5 characters', () => {
+    // Arrange
+    // Act
 
-  test('hello', () => {
-    expect("between 5 and 15").toContain('5 and 15')
+    let response = PasswordValidator.checkPassword('mom')
+
+    // Assert
+    expect(response.result).toBeFalsy()
+    expect(response.errors.length).toEqual(1)
+    expect(response.errors[0]).toEqual('InvalidLenghtError')
   })
 })
-
-
