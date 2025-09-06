@@ -14,6 +14,7 @@ export type CheckedPasswordResponse = {
 
 export class PasswordValidator {
   public static checkPassword(password: string) {
+    const errors: PasswordError[] = []
     let response: CheckedPasswordResponse = {
       result: false,
       errors: [],
@@ -22,29 +23,20 @@ export class PasswordValidator {
     console.log(password.length)
 
     if (password.length < 5 || password.length > 15) {
-      return (response = {
-        result: false,
-        errors: [PasswordErrors.InvalidLenghtError],
-      })
+      errors.push(PasswordErrors.InvalidLenghtError)
     }
 
     if (!/[A-Z]/.test(password)) {
-      return (response = {
-        result: false,
-        errors: [PasswordErrors.NoUpperCase],
-      })
+      errors.push(PasswordErrors.NoUpperCase)
     }
 
     if (!/\d/.test(password)) {
-      return (response = {
-        result: false,
-        errors: [PasswordErrors.NoDigits],
-      })
+      errors.push(PasswordErrors.NoDigits)
     }
 
     return (response = {
-      result: true,
-      errors: [],
+      result: errors.length === 0,
+      errors: errors,
     })
   }
 }
