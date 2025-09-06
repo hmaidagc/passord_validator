@@ -22,10 +22,15 @@ export class PasswordValidator {
     console.log(password.length)
 
     if (password.length < 5 || password.length > 15) {
-      response.result === false
-      response.errors.push(PasswordErrors.InvalidLenghtError)
+      return (response = {
+        result: false,
+        errors: [PasswordErrors.InvalidLenghtError],
+      })
     }
 
-    return response
+    return (response = {
+      result: true,
+      errors: [],
+    })
   }
 }
