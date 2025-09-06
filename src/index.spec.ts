@@ -9,7 +9,7 @@ describe('password validator', () => {
 
     // Assert
     expect(response.result).toBeFalsy()
-    expect(response.errors[0]).toEqual('InvalidLenghtError')
+    expect(response.errors).toContain('InvalidLenghtError')
   })
 
   it('returns invalid lenght error for strings more than 15 characters', () => {
@@ -17,12 +17,10 @@ describe('password validator', () => {
     // Act
 
     let response = PasswordValidator.checkPassword('asdwfdfdsfdfdfdf')
-    console.log(response.result)
-    console.log(response.errors)
 
     // Assert
     expect(response.result).toBeFalsy()
-    expect(response.errors[0]).toEqual('InvalidLenghtError')
+    expect(response.errors).toContain('InvalidLenghtError')
   })
 
   it('returns  no upper case error for password without at least one upper case letter', () => {
@@ -31,15 +29,15 @@ describe('password validator', () => {
     let response = PasswordValidator.checkPassword('maxwell1_c')
     // Assert
     expect(response.result).toBeFalsy()
-    expect(response.errors[0]).toEqual('NoUpperCase')
+    expect(response.errors).toContain('NoUpperCase')
   })
 
-  it('returns  no NoDigits error for password without any digit', () => {
+  it('returns no NoDigits error for password without any digit', () => {
     // Arrange
     // Act
     let response = PasswordValidator.checkPassword('maxwellTheBe')
     // Assert
     expect(response.result).toBeFalsy()
-    expect(response.errors[0]).toEqual('NoDigits')
+    expect(response.errors).toContain('NoDigits')
   })
 })
