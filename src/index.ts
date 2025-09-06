@@ -12,31 +12,25 @@ export type CheckedPasswordResponse = {
   errors: PasswordError[]
 }
 
+type PasswordRule = (password: string) => PasswordError | null
+
 export class PasswordValidator {
-  public static checkPassword(password: string) {
-    const errors: PasswordError[] = []
-    let response: CheckedPasswordResponse = {
-      result: false,
-      errors: [],
-    }
+  public static rules: Record<PasswordError, PasswordRule> = {
+    InvalidLenghtError: (pw) => (pw.length < 5 ? 'InvalidLenghtError' : null),
+    Exceeds15Characters: (pw) =>
+      pw.length > 15 ? 'Exceeds15Characters' : null,
+    NoUpperCase: (pw) => (!/[A-Z]/.test(pw) ? 'NoUpperCase' : null),
+    NoDigits: (pw) => (!/\d/.test(pw) ? 'NoDigits' : null),
+  }
 
-    console.log(password.length)
+  public static checkPassword(password: string): CheckedPasswordResponse {
+    const errors: PasswordError[] = Object.values(this.rules)
+      .map((rule) => rule(password))
+      .filter((e): e is PasswordError => e !== null)
 
-    if (password.length < 5 || password.length > 15) {
-      errors.push(PasswordErrors.InvalidLenghtError)
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      errors.push(PasswordErrors.NoUpperCase)
-    }
-
-    if (!/\d/.test(password)) {
-      errors.push(PasswordErrors.NoDigits)
-    }
-
-    return (response = {
+    return {
       result: errors.length === 0,
       errors: errors,
-    })
+    }
   }
 }

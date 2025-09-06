@@ -20,7 +20,7 @@ describe('password validator', () => {
 
     // Assert
     expect(response.result).toBeFalsy()
-    expect(response.errors).toContain('InvalidLenghtError')
+    expect(response.errors).toContain('Exceeds15Characters')
   })
 
   it('returns  no upper case error for password without at least one upper case letter', () => {
