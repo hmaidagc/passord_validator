@@ -33,4 +33,13 @@ describe('password validator', () => {
     expect(response.result).toBeFalsy()
     expect(response.errors[0]).toEqual('NoUpperCase')
   })
+
+  it('returns  no NoDigits error for password without any digit', () => {
+    // Arrange
+    // Act
+    let response = PasswordValidator.checkPassword('maxwellTheBe')
+    // Assert
+    expect(response.result).toBeFalsy()
+    expect(response.errors[0]).toEqual('NoDigits')
+  })
 })

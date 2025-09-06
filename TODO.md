@@ -17,7 +17,7 @@ FA2STR
 - Out object:
   message : {
   result: boolean,
-  message:[{"success","less than 5 characters" ,"more than 15 characters","no digits","no upper case letter"}]
+  errors:[{"success","less than 5 characters" ,"more than 15 characters","no digits","no upper case letter"}]
   }
 
 - In Object:
@@ -27,7 +27,8 @@ FA2STR
 
 **Checklist**
 
-- 12345 returns true
-- sde5s returns true
-- Asd2s returns true
+- mom returns false : InvalidLenghtError
+- maxwell1_c returns false : NoUpperCase
+- maxwellTheBe returns false : NoDigits
+- asdwfdfdsfdfdfdf returns false : Exceeds15Characters
 - asd returns : {false, ["less than 5 characters"]}

@@ -35,6 +35,13 @@ export class PasswordValidator {
       })
     }
 
+    if (!/\d/.test(password)) {
+      return (response = {
+        result: false,
+        errors: [PasswordErrors.NoDigits],
+      })
+    }
+
     return (response = {
       result: true,
       errors: [],
